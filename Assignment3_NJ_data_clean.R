@@ -23,7 +23,7 @@ library(leaflet)
 
 
 # --- Working Directory ---
-#setwd("C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal")
+##setwd("")
 
 # --- Census API Key ---
 # tidycensus::census_api_key("insert_your_key_here", install = TRUE, overwrite = TRUE)
@@ -46,7 +46,7 @@ nj_pop$County <- gsub(" County", "", nj_pop$County)
 # --- Local Spatial + CSV Data ---
 # In load_data.R, replace the monmouth_locations section:
 
-monmouth_geo <- st_read("C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal/Monmouth_County_Historic_Sites_Inventory_(Public_View).geojson")
+monmouth_geo <- st_read("data/Monmouth_County_Historic_Sites_Inventory_(Public_View).geojson")
 
 # Transform to WGS84 and extract proper lat/long
 monmouth_locations <- monmouth_geo %>%
@@ -62,13 +62,13 @@ monmouth_locations <- monmouth_geo %>%
   st_drop_geometry()
 
 glam_sf <- read_csv(
-  "C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal/geocoded_spreadsheet.csv",
+  "data/geocoded_spreadsheet.csv",
   show_col_types = FALSE
 ) %>%
   rename(name = MemberOrganizations, latitude = Latitude, longitude = Longitude)
 
 higher_ed_1 <- read_csv(
-  "C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal/nj_higher_ed_geocoded.csv", 
+  "data/nj_higher_ed_geocoded.csv", 
   show_col_types = FALSE
 )
 
@@ -99,10 +99,10 @@ libraries_clean <- libraries %>%
 
 
 # --- Shapefiles / GeoJSONs ---
-counties <- st_read("C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal/NJCounties.shp")
+counties <- st_read("data/NJCounties.shp")
 nj_counties <- counties
 
-rmha_map <- st_read("C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal/RMHA-map-2.geojson")
+rmha_map <- st_read("data/RMHA-map-2.geojson")
 
 # --- Transit Routes (GTFS) ---
 gtfs_data <- read_gtfs("https://www.njtransit.com/rail_data.zip")
@@ -147,8 +147,9 @@ save(
   monmouth_locations, glam_sf, higher_ed,
   libraries_clean,
   all_stops_sf, stops_df, bus_stops_df,
-  file = "C:/Users/crook/Documents/DSSA Program/NJ_data_clean.RData"
+  file = "data/NJ_data_clean.RData"
 )
+
 
 
 
