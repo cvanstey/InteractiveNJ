@@ -10,10 +10,10 @@ library(ggplot2)
 library(purrr)
 library(stringr)
 
-setwd("C:/Users/crook/Documents/DSSA Program/New_Jersey_Culture_Portal")
+#setwd("")
 
 # --- Load pre-processed data ---
-load("NJ_data_clean.RData")
+load("data/NJ_data_clean.RData")
 ls()
 source("census_data_module.R")
 source("transit_trends.R")
@@ -558,4 +558,5 @@ server <- function(input, output, session) {
 
 # --- Run App ---
 shinyApp(ui = ui, server = server)
+
 
